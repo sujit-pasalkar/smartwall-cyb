@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="121" height="175" viewBox="0 0 121 175">
+  <g id="Group_93851" data-name="Group 93851" transform="translate(-372 -3605)">
+    <g id="Group_93817" data-name="Group 93817" transform="translate(-385 3105)">
+      <g id="Rectangle_412" data-name="Rectangle 412" transform="translate(757 500)" fill="#f5f5f5" stroke="#949caf" stroke-width="1" opacity="0.326">
+        <rect width="121" height="175" rx="5" stroke="none"/>
+        <rect x="0.5" y="0.5" width="120" height="174" rx="4.5" fill="none"/>
+      </g>
+      <g id="Group_10584" data-name="Group 10584" transform="translate(768 511)">
+        <rect id="Rectangle_17306" data-name="Rectangle 17306" width="99" height="46" rx="4" transform="translate(0 107)" fill="#dfdfdf"/>
+        <rect id="Rectangle_17307" data-name="Rectangle 17307" width="99" height="98" rx="4" fill="#dfdfdf"/>
+      </g>
+      <text id="_1" data-name="1" transform="translate(812 568)" fill="#838383" font-size="20" font-family="Roboto-Black, Roboto" font-weight="800"><tspan x="0" y="0">1</tspan></text>
+      <text id="_2" data-name="2" transform="translate(813 649)" fill="#838383" font-size="20" font-family="Roboto-Black, Roboto" font-weight="800"><tspan x="0" y="0">2</tspan></text>
+    </g>
+  </g>
+</svg>

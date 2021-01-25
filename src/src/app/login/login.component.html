@@ -1,0 +1,30 @@
+<!-- login page layout -->
+<div class="login-main-column ">
+	<!-- left column -->
+	<div class="left-column" id="LeftPanel">
+		<div class="row" id="left-overlay"></div>
+		<div class="main-logo">
+			<img src="../../assets/images/loginModule/andlogo.png" alt="" class="img-responsive">
+		</div>
+		<div class="footer-caption">
+			<div id="Login-Left-Footer">
+				{{txtMsg}}
+			</div>
+			<div class="footerNavigateBtn">
+				<div id="LeftBtn" class="leftNavigateBtn" (mouseover)="changeTextMsg('LeftBtn')"></div>
+				<div id="RightBtn" class="rightNavigateBtn d-none" (mouseover)="changeTextMsg('RightBtn')"></div>
+			</div>
+		</div>
+	</div>
+	<!-- right column -->
+	<div class="right-column" id="RightPanel">
+		<div class="login-col">
+			<router-outlet></router-outlet>
+		</div>
+		<div class="footer-copyright">
+			© AND Agency {{currentYear}}
+		</div>
+
+	</div>
+</div>
+

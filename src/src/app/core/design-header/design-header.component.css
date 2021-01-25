@@ -1,0 +1,165 @@
+.agency-header .navbar2 {
+    padding: 0 1.5625rem;
+    box-shadow: 0 0.188rem 0.563rem rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-bottom: 0 !important;
+    border-top: 1px solid #e2e4e9;
+    position: relative;
+    z-index: 3;
+}
+
+.agency-header .navbar2 .navbar-nav {
+    width: 100%;
+}
+
+.agency-header .navbar2 .navbar-nav .nav-item {
+    position: relative;
+    margin: 0 2.063rem;
+}
+
+.agency-header .navbar2 .navbar-nav .nav-item a {
+    color: #86898c;
+    padding: 1.40rem 0.2rem;
+    margin: 0;
+    font-size: 1.063rem;
+    font-weight: 400;
+    transition: 0.5 ease;
+    line-height: 1.25rem;
+}
+
+.agency-header .navbar2 .navbar-nav .nav-item a:hover,
+.agency-header .navbar2 .navbar-nav .nav-item a.active-route {
+    color: #25282a;
+}
+
+.agency-header .navbar2 .navbar-nav .nav-item a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0.188rem;
+    background: var(--theme-color);
+    content: "";
+    transition: all ease .4s;
+    border-radius: 0.313rem;
+    z-index: 1;
+}
+
+.agency-header .navbar2 .navbar-nav .nav-item a:hover:after,
+.agency-header .navbar2 .navbar-nav .nav-item a.active-route:after {
+    width: 100%;
+}
+
+.agency-header .navbar2 .navbar-brand {
+    position: relative;
+    padding-left: 0;
+    font-size: 1.25rem;
+}
+
+.agency-header .navbar2 .navbar-brand .edit {
+    display: none;
+}
+.edit-action-btn {
+    display: inline-block;
+    margin: 0 0.063rem;
+    min-width: 2rem;
+    padding: 0 0.438rem 0.3rem;
+    text-align: center;
+    border: none;
+    background: #e3e6e9;
+    width: 0.938rem;
+}
+.agency-header .navbar2 .navbar-brand .edit img {
+    height: 1rem;
+    width: 1rem;
+}
+.agency-header .navbar2 .navbar-brand:hover .edit {
+    position: absolute;
+    right: 0.625rem;
+    top: 0.400rem;
+    display: inline-block;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.agency-header .navbar2 .navbar-brand input:focus {
+    box-shadow: none;
+}
+
+.agency-header .navbar2 .navbar-brand input {
+    padding: 0.3125rem;
+    position: relative;
+    color: #25282A;
+    font-size: 1.25rem;
+    /* font-weight: 500; */
+    border: 1px solid #fff;
+    padding-right: 3rem;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.agency-header .navbar2 .navbar-brand input.edit-label {
+    border: 1px solid #ccc;
+}
+
+.save {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 4.6rem;
+    padding: 0.188rem 0.125rem 0.188rem 0.188rem;
+    background: #ffffff;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+#wallLable[readonly] {
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+.edit-wall {
+    max-width: 22.813rem;
+    position: relative;
+}
+
+
+/* ----- media query starts from here ----*/
+
+
+/* ----- media query for screens 1441px, 1600px, 1680px -----  */
+
+@media (min-width: 1441px) and (max-width:1680px) {}
+
+
+/* ----- media query for screens 1280px, 1360px, 1366px, 1440px -----  */
+
+@media (min-width: 1280px) and (max-width:1440px) {
+
+    .agency-header .navbar2 .navbar-nav .nav-item {
+        margin: 0 1.375rem 0 1.125rem;
+    }
+    .agency-header .navbar2 .navbar-nav .nav-item a {
+        font-size: 1rem;
+    }
+}
+
+
+/* ----- media query for screens 1024px, 1152px, 1200px -----  */
+
+@media (min-width: 1024px) and (max-width:1279px) {
+
+    .agency-header .navbar2 .navbar-nav .nav-item {
+        margin: 0 1.25rem 0 0.875rem;
+    }
+    .agency-header .navbar2 .navbar-nav .nav-item a {
+        font-size: 0.875rem;
+    }
+}
+
+
+/* ----- media query for below 992px screens ----- */
+
+@media (max-width:992px) {}
+
+@media (min-width: 993px) and (max-width:1023px) {}

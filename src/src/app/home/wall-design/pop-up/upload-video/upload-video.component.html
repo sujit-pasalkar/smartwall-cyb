@@ -1,0 +1,96 @@
+<!-- <ngx-spinner size="medium" bdColor="rgba(255,255,255,0.8)" color="#fff" type="la-line-spin-fade-rotating">
+  <div class="la-line-spin-fade-rotating la-3x">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ngx-spinner> -->
+<div class="login payment-layout">
+  <mat-dialog-content class="mat-typography payment-Scroll" style="overflow: inherit;margin: 0 -24px !important;">
+    <h4>Videos</h4>
+    <div>
+      <label class="d-block">Select</label>
+      <div *ngIf="videoList.length != 0; else noExistingData">
+        <div class="flex-container">
+          <ul *ngFor="let item of videoList;let i=index">
+            <li style="list-style: none; padding: 1rem;">
+              <div class="image-container">
+                <img class="img" [src]="item.src"/>
+                <!-- <div *ngIf="item.targetUrl != ''" cdkDrag>
+                  <div *ngIf="item.targetUrl  | imageJwt | async; else loading">
+                    <img class="img" [src]="item.targetUrl  | imageJwt | async" />
+                  </div>
+                  <ng-template #loading>
+                    <div class="la-line-spin-fade-rotating la-2x">
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </ng-template>
+                </div> -->
+
+                <div *ngIf="videoList.length != 0 " class="action-buttons">
+                  <mat-checkbox class="action-icon" [checked]="item.isChecked" class="design-question-checkbox"
+                    (change)="selectImage($event,item.index)" #checkbox>
+                  </mat-checkbox>
+                  <input class="action-icon" type="image" src="../../assets/images/WallModule/delete_img.svg"
+                    (click)="deleteUploadedImage(item.index)" />
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <ng-template #noExistingData>
+        <div class="flex-container">
+          <ul *ngFor="let item of homeService.noExistingData">
+            <li style="list-style: none; padding: 1rem;">
+              <img [src]="item.src" style="height: 8rem;width: 8rem;" />
+            </li>
+          </ul>
+        </div>
+      </ng-template>
+
+      <!-- <div *ngIf="!addingImg">
+        <p-carousel class="upload-img-carousel"
+          [value]="videoList.length != 0 ? videoList : homeService.noExistingData" [numVisible]="3"
+          [numScroll]="3" [circular]="false">
+          <ng-template let-item pTemplate="item">
+            <div class="product-item position-relative">
+              <div class="product-item-content">
+                <span class="slider-img">
+                  <img [src]="item.src" />
+                </span>
+                <div *ngIf="videoList.length != 0 " class="mt-5 image-actions">
+                  <span class="check-image d-inline-block">
+                    <mat-checkbox [checked]="item.isChecked" class="design-question-checkbox"
+                      (change)="selectImage($event,item.index)" #checkbox>
+                    </mat-checkbox>
+                  </span>
+                  <span style="display: inline" (click)="deleteUploadedImage(item.index)">
+                    <input type="image" src="../../assets/images/WallModule/delete_img.svg" /></span>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div> -->
+      <span class="ortext-container d-block text-center mt-3 mb-3"><span class="position-relative">OR</span></span>
+      <div class="mt-4" style="width: 100%;">
+        <label class="d-block">New Video</label>
+        <input [(ngModel)]="videoUrl" class="form-control d-inline-block" style="width: 88% !important;" placeholder="Type URL..">
+        <span class="add-video-btn btn-green" style="margin-left: 1rem;">
+            <img class="add-btn-img" src="../../../../assets/images/WallModule/add-plus-button-white.svg" (click)="addVideo()">
+        </span>
+    </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" style="padding-left:8px">
+    <button class="btn-green" mat-button (click)="save()">Save</button>
+    <button class="btn-gray ml-2" mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  </mat-dialog-actions>
+</div>

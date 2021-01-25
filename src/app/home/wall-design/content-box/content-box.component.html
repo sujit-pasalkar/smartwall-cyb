@@ -1,0 +1,263 @@
+<div class="row m-0 pt-4 mt-4 tab-content">
+  <div class="col-md-9 pl-0" style="padding-bottom: 7rem;">
+    <div class="row m-0">
+      <div class="col-md-6 pl-0">
+        <label class="d-block section-header">Type</label>
+        <ngx-select [items]="homeService.contentTypeIds" [allowClear]="false" optionTextField="contentTypeName"
+          optionValueField="contentTypeId" placeholder="Select Type" class="w-50"
+          (select)="selectedContentType($event)">
+        </ngx-select>
+      </div>
+      <div class="col-md-6">
+        <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeId == '6c80f302-d3eb-11ea-9cdb-06a49e672dea' ||
+        homeService.editScreenDetails.contents[this.index].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3'">
+          <label class="d-block section-header">Display Time</label>
+          <input type="number" class="form-control w-25 d-inline-block"
+            [(ngModel)]="homeService.editScreenDetails.contents[this.index].itemDisplayTime" /><span
+            class="d-inline-block ml-1">Sec</span>
+          <!--  -->
+          <div
+            *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3')">
+            <label class="d-block section-header mt-4">Transition Effect</label>
+            <ngx-select [items]="imageTransitionEffectsArr" [allowClear]="false" placeholder="Select Transition"
+              class="w-50" (select)="selectedTransitionType($event)">
+            </ngx-select>
+          </div>
+        </div>
+        <div title="widget refersh time"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '13ce14bc-e2ab-11ea-9cdb-06a49e672dea')">
+          <label class="d-block section-header">Refresh Time</label>
+          <input type="number" class="form-control w-25 d-inline-block"
+            [(ngModel)]="homeService.editScreenDetails.contents[this.index].itemDisplayTime" /><span
+            class="d-inline-block ml-1">Sec</span>
+        </div>
+      </div>
+      <div class="col-md-12 mt-4 pl-0">
+        <div class="image-section"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3')">
+          <label class="d-block section-header">Images</label>
+          <p-carousel *ngIf="!addingImg" class="upload-img-carousel" [value]="
+          homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0 ?
+            homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3'
+             ? homeService.editScreenDetails.contents[this.index].contentTypeItems
+             : homeService.noExistingData
+             :homeService.noExistingData" [numVisible]="3" [numScroll]="3" [circular]="true">
+            <ng-template let-item pTemplate="item">
+              <div class="product-item position-relative">
+                <div class="product-item-content">
+                  <div>
+                    <span class="slider-img">
+                      <img *ngIf="item.targetUrl == ''" [src]="item.src" />
+                      <img *ngIf="item.targetUrl != ''" [src]="item.targetUrl  | imageJwt | async" />
+                    </span>
+                    <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0"
+                      class="mt-5 image-actions">
+                      <span class="check-image d-inline-block">
+                        <input type="image" src="../../assets/images/WallModule/edit_image.svg"
+                          (click)="uploadImagePopup()" />
+                      </span>
+                      <span style="display: inline">
+                        <input type="image" src="../../assets/images/WallModule/delete_img.svg" /></span>
+                      <!-- add delete function -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+
+          <div class="row">
+            <div class="col-md-9">
+              <div class="add-image-btn text-center p-2" style="margin: 2rem;cursor: pointer;"
+                (click)="uploadImagePopup()">
+                <img class="add-btn-img" src="../../../assets/images/WallModule/add-plus-button.svg"> Add
+                Image</div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+        </div>
+
+        <div class="social-media-section"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == 'aa666ce2-d555-11ea-9cdb-06a49e672dea')">
+          <label class="d-block section-header">Social Media Feeds</label>
+          <button *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length == 0"
+            (click)="uploadFeedPopup()" class="w-50 form-control d-inline-block">Click Edit to add your social
+            mediacontent</button>
+
+          <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0">
+            <button
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId != 'aa666ce2-d555-11ea-9cdb-06a49e672dea'"
+              (click)="uploadFeedPopup()" class="w-50 form-control d-inline-block">Click Edit to add your social
+              mediacontent</button>
+          </div>
+
+          <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0">
+            <button
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId == 'aa666ce2-d555-11ea-9cdb-06a49e672dea'"
+              (click)="uploadFeedPopup()" class="w-50 form-control d-inline-block">
+              {{homeService.editScreenDetails.contents[this.index].contentTypeItems[0].name}}</button>
+          </div>
+
+          <span class="edit-media-content"><img (click)="uploadFeedPopup()" class="ml-2 pl-1 position-relative"
+              src="../../../assets/images/WallModule/edit-icon.png"></span>
+          <span class="delete-media-content"><img class="ml-2 pl-1 position-relative"
+              src="../../../assets/images/WallModule/delete-icon.png"></span>
+          <!-- add edit/delete function -->
+        </div>
+
+        <div class="video-section"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '6c80f302-d3eb-11ea-9cdb-06a49e672dea')">
+          <label class="d-block section-header">Videos</label>
+          <!-- add video gird dynamic logic -->
+          <p-carousel class="upload-img-carousel" [value]="
+            homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0 ?
+              homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId == '6c80f302-d3eb-11ea-9cdb-06a49e672dea'
+               ? homeService.editScreenDetails.contents[this.index].contentTypeItems
+               : homeService.noExistingData
+               :homeService.noExistingData" [numVisible]="3" [numScroll]="3" [circular]="true">
+            <ng-template let-item pTemplate="item">
+              <div class="product-item position-relative">
+                <div class="product-item-content">
+                  <div>
+                    <span class="slider-img">
+                      <img [src]="item.src  | imageJwt | async" />
+                    </span>
+                    <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0"
+                      class="mt-5 image-actions">
+                      <span class="check-image d-inline-block" (click)="uploadVideoPopup()">
+                        <input type="image" src="../../assets/images/WallModule/edit_image.svg" />
+                      </span>
+                      <span style="display: inline">
+                        <input type="image" src="../../assets/images/WallModule/delete_img.svg" /></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+          <div class="row">
+            <div class="col-md-9">
+              <div class="add-image-btn text-center p-2" style="margin: 2rem;cursor: pointer;"
+                (click)="uploadVideoPopup()">
+                <img class="add-btn-img" src="../../../assets/images/WallModule/add-plus-button.svg"> Add
+                Video</div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+        </div>
+
+        <div class="widgets-section"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '13ce14bc-e2ab-11ea-9cdb-06a49e672dea')">
+          <label class="d-block section-header">Widgets</label>
+
+          <!-- <button *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length == 0"
+            class="w-50 form-control d-inline-block" (click)="uploadWidgtPopup()">Click Edit to add your Widget
+            content</button>
+          <button *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0"
+            class="w-50 form-control d-inline-block" (click)="uploadWidgtPopup()">
+            {{homeService.editScreenDetails.contents[this.index].contentTypeItems[0].name}}
+          </button> -->
+          <button *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length == 0"
+            (click)="uploadWidgtPopup()" class="w-50 form-control d-inline-block">Click Edit to add your Widget
+            content</button>
+
+          <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0">
+            <button
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId != '13ce14bc-e2ab-11ea-9cdb-06a49e672dea'"
+              (click)="uploadWidgtPopup()" class="w-50 form-control d-inline-block">Click Edit to add your Widget
+              content</button>
+          </div>
+
+          <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0">
+            <button
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId == '13ce14bc-e2ab-11ea-9cdb-06a49e672dea'"
+              (click)="uploadWidgtPopup()" class="w-50 form-control d-inline-block">
+              {{homeService.editScreenDetails.contents[this.index].contentTypeItems[0].name}}</button>
+          </div>
+
+          <span class="edit-media-content"><img class="ml-2 pl-1 position-relative"
+              src="../../../assets/images/WallModule/edit-icon.png" (click)="uploadWidgtPopup()"></span>
+          <span class="delete-media-content"><img class="ml-2 pl-1 position-relative"
+              src="../../../assets/images/WallModule/delete-icon.png"></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-3 pr-0">
+    <div class="row">
+      <label class="d-block section-header">Layout</label>
+    </div>
+    <div class="row">
+      <img *ngIf="this.layoutBoxImage == 'Layout100-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/100-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout5050-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/5050-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout5050-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/5050-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout7525-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/7525-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout7525-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/7525-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout2575-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/2575-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout2575-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/2575-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout502525-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/502525-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout502525-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/502525-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout502525-2'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/502525-3.svg">
+      <!--  -->
+      <img *ngIf="this.layoutBoxImage == 'Layout252550-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/252550-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout252550-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/252550-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout252550-2'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/252550-3.svg">
+    </div>
+
+    <label class="d-block section-header mt-4">Padding</label>
+    <div class="float-left mb-3" style="width: 100%;">
+      <div>
+        <input type="number" class="d-inline-block padding-input form-control border-right-0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingTop" />
+
+        <input type="number" class="d-inline-block padding-input form-control border-right-0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingBottom" />
+        <span class="padding-unit padding-input">%</span>
+      </div>
+      <div>
+        <span class="padding-input-label mt-2 float-left">Top</span>
+        <span class="padding-input-label mt-2 float-left">Bottom</span>
+      </div>
+    </div>
+    <div class="mt-4 float-left">
+      <div>
+        <input type="number" class="d-inline-block padding-input form-control border-right-0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingLeft" />
+        <input type="number" class="d-inline-block padding-input form-control border-right-0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingRight" />
+        <span class="padding-unit padding-input">%</span>
+      </div>
+      <div>
+        <span class="padding-input-label mt-2 float-left">Left</span>
+        <span class="padding-input-label mt-2 float-left">Right</span>
+      </div>
+    </div>
+  </div>
+</div>

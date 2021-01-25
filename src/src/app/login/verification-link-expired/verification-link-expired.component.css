@@ -1,0 +1,11 @@
+/* @import "../link-expired/link-expired.component.css"; */
+
+.login .form-top.email-confirm {margin: 1.5rem 0 2.5rem; padding: 1.575rem 2.188rem; }
+
+@media screen and (max-width: 85.375rem) {
+    #linkExpired .email-confirmed-content {
+        height: 5.625rem;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+}

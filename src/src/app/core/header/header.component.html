@@ -1,0 +1,69 @@
+<header class="agency-header" id="agency-header">
+  <nav class="navbar navbar-expand navbar1">
+    <a class="navbar-brand">
+      <img _ngcontent-kia-c1="" alt="" class="img-responsive" src="../../assets/images/WallModule/andlogo_black.png">
+    </a>
+    <ul class="navbar-nav navbar-left">
+      <li class="nav-item" >
+        <!-- <a routerLink="/wall-listing" routerLinkActive="active-route" class="nav-link">Walls</a> -->
+        <a [routerLink]="['/wall-listing']" [routerLinkActive]="'active-route'" class="nav-link active-route">Walls</a>
+        <!-- (click)="navigate()" -->
+
+      </li>
+      <!--  <li class="nav-item active">
+                <button (click)="planLimit()"> Plan limit</button>
+            </li>  -->
+      <!-- <li class="nav-item " *ngIf="isClientSuperAdmin === 'true' && listingFlag">
+                <a routerLink="/account-listing" routerLinkActive="active-route" class="nav-link " (click)="showAccount()">Accounts</a>
+            </li> -->
+    </ul>
+    <div class="header-right-section">
+      <!-- <button *ngIf="userPlanId === 1 && isClientSuperAdmin !== 'true'" class="btn-upgrade"
+        (click)="checkSaveToggle('upgrade')">Click To Upgrade</button>
+      <div *ngIf="stripeSubscriptionStatus === 'past_due'">
+        <p class="error-message paymentDue">Payment past due</p>
+      </div> -->
+      <ul class="header-right-section">
+        <li class="active">
+          <a routerLinkActive="active-route" class="setting-link">
+            <img src="../../../assets/images/Setting Icon.svg" alt="Setting" (click)="showWallTab()">
+          </a>
+        </li>
+        <li class="user-details nav-item dropdown" id="dropDown">
+          <!-- <div class="user-name">
+                    <span class="hidden-xs d-block">{{labelText | titlecase}}</span>
+                    <small class="d-block" style="margin-top: -5px;">Admin</small>
+                </div> -->
+          <span class="user-info">
+            <span class="user-name">
+              <!--ellipses style="display: block; width:100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" -->
+              {{labelText | titlecase}}
+            </span>
+            <span class="user-admin">Admin</span>
+          </span>
+          <span>
+            <h6 style="margin-top: 3px;">
+              {{this.shortName | uppercase}}
+            </h6>
+          </span>
+          <!-- <picture class="user-image"><img src="assets/images/user1.png" alt="User"></picture> -->
+          <span style="padding: 1.5rem 0;" (click)="loginDropdown()">
+            <a class="dropdown-toggle">
+              <!--  <img src="../../../assets/images/UserImage.svg" class="user-image" alt="User Image"> -->
+            </a></span>
+          <div class="login-dropdown" aria-labelledby="navbarDropdown" id="dropdown-menu"
+            [ngClass]="dropDown ? 'success' : 'closew'">
+            <div *ngIf="dropDown">
+              <!-- <a class="dropdown-item" href="javascript:void(0)" (click)="changePassword()">Change
+                Password</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="checkSaveToggle('openHelpWebsite')">Help</a> -->
+              <a class="dropdown-item" href="javascript:void(0)" (click)="checkSaveToggle('logout')">Logout</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="checkSaveToggle('changePassword')">Change Password</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="checkSaveToggle('changeAccount')">Change Account</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

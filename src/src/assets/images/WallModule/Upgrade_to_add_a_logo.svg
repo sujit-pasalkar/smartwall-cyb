@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="270.878" height="132.97" viewBox="0 0 270.878 132.97">
+  <g id="Group_9570" data-name="Group 9570" transform="translate(-677 -109)">
+    <path id="Path_6336" data-name="Path 6336" d="M5,0H265.878a5.215,5.215,0,0,1,5,5.405V127.565a5.215,5.215,0,0,1-5,5.405H5a5.215,5.215,0,0,1-5-5.405V5.405A5.215,5.215,0,0,1,5,0Z" transform="translate(677 109)" fill="#f7b70e"/>
+    <g id="Group_9568" data-name="Group 9568" transform="translate(318 -410.03)">
+      <text id="Upgrade_to_add_a_logo" data-name="Upgrade to add a logo" transform="translate(415 610)" fill="#fff" font-size="16" font-family="Roboto, sans-serif" font-weight="500"><tspan x="0" y="0">Upgrade to add a logo</tspan></text>
+      <g id="lock" transform="translate(420 556)">
+        <g id="Group_9416" data-name="Group 9416" transform="translate(64)">
+          <path id="Path_3775" data-name="Path 3775" d="M83.67,10.116H81.984V7.868a7.868,7.868,0,1,0-15.736,0v2.248H64.562a.562.562,0,0,0-.562.562v14.05a2.25,2.25,0,0,0,2.248,2.248H81.984a2.25,2.25,0,0,0,2.248-2.248V10.678A.562.562,0,0,0,83.67,10.116ZM75.8,21.856a.562.562,0,0,1-.559.624H72.992a.562.562,0,0,1-.559-.624l.355-3.188a2.223,2.223,0,0,1-.92-1.808,2.248,2.248,0,0,1,4.5,0,2.223,2.223,0,0,1-.92,1.808Zm2.813-11.74H69.62V7.868a4.5,4.5,0,1,1,8.992,0Z" transform="translate(-64)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

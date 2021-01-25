@@ -1,0 +1,13 @@
+.section-header {
+    font-size: 1.0625rem;
+  }
+  
+  .ortext-container {
+    border-bottom:  1px solid #f6f6f6;
+  }
+  
+  .ortext-container span {
+    top: 10px;
+    background: #ffffff;
+    padding: 5px;
+  }

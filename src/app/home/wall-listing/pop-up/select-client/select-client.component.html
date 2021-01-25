@@ -1,0 +1,23 @@
+
+<div class="login payment-layout">
+  <mat-dialog-content class="mat-typography payment-Scroll" style="overflow: inherit;">
+    <h4>Select Account</h4>
+    <form class="checkout">
+      <div>
+        <label for="select">Select Account</label>
+      </div>
+      <div class="form-group mb-4">
+        <div class="country">
+          <ngx-select [allowClear]="false" [items]="data.data" optionValueField="value" optionTextField="label"
+            placeholder="Select Account" class="country login-input-pg-dd"
+            (select)="selectedClientId($event)" required>
+          </ngx-select>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" style="padding-left:8px">
+    <button class="btn-green" mat-button (click)="continue()">Continue</button>
+    <button class="btn-gray ml-2" mat-button mat-dialog-close (click)="cancel()" cdkFocusInitial>Cancel</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,24 @@
+p {
+  margin-bottom: 0;
+  line-height: 1.25rem;
+  color: #4b4f54;
+}
+
+.logo {
+  width: 6rem;
+}
+.password-modal-container {
+  text-align: center;
+  padding: 0.875rem 0 1rem;
+}
+.password-modal-container h2 {
+  margin: 1.5rem 0 1rem;
+  font-size: 1.375rem;
+  font-weight: 500;
+}
+
+.optional-label{
+  font-size: x-small;
+    font-weight: 400;
+    color: gray;
+}

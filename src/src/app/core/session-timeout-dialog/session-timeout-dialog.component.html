@@ -1,0 +1,18 @@
+<mat-dialog-content class="mat-typography text-center">
+  <div class="timeoutPopup">
+    <h2>Your session will expire in</h2>
+    <div class="countDown">
+      <img src="../../assets/images/stopwatch/stopwatch.png" style="vertical-align: bottom;">
+      <span class="alignC">{{seconds}}</span>
+      <span class="secondStyle">seconds</span>
+    </div>
+    <div class="to-continue">
+      <p>Please click <span class="bold">Continue</span> to keep working or</p>
+      <p>click <span class="bold">Logout</span> to end your session now.</p>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center" style="padding-left:8px">
+  <button class="btn-green mr-4" mat-button [mat-dialog-close]="true">Continue</button>
+  <button class="btn-gray ml-4" mat-button (click)="logout()">Logout</button>
+</mat-dialog-actions>

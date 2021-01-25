@@ -1,0 +1,20 @@
+.timeoutPopup p {
+  margin-bottom: 0;
+  line-height: 1.25rem;
+  color: #4B4F54;
+}
+.alignC {
+  font-size: 4.70rem;
+  font-weight: 500;
+  margin: 0 1rem;
+}
+.timeoutPopup .countDown {
+    margin-bottom: 1.9rem;
+}
+.timeoutPopup .bold {
+  font-weight: 600;
+}
+.timeoutPopup .to-continue p {
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+}

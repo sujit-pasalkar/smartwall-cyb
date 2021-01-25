@@ -1,0 +1,354 @@
+<div class="row m-0 pt-4 mt-4 tab-content">
+  <div class="col-md-9 pl-0" style="padding-bottom: 7rem;">
+    <div class="row m-0">
+      <div class="col-md-6 pl-0">
+        <label class="d-block section-header">Type</label>
+        <!-- <ngx-select [items]="homeService.contentTypeIds" [allowClear]="false" optionTextField="contentTypeName"
+          optionValueField="contentTypeId" placeholder="Select Type" class="w-50" [defaultValue]="testDefaultVal"
+          [noAutoComplete]=true (select)="selectedContentType($event)">
+        </ngx-select> -->
+        <select name="Select Type" class="form-control" id="select type" #mySelect
+          (change)="selectedContentType(mySelect.value)">
+          <!-- [(ngModel)]="selectedContentTypeName" -->
+          <option disabled [selected]="selectedContentTypeName == 'Select Type'" value="Select Type">Select Type
+          </option>
+          <option [selected]="selectedContentTypeName == type.contentTypeName"
+            *ngFor="let type of homeService.contentTypeIds;" [value]="type.contentTypeId">
+            {{type.contentTypeName}}
+          </option>
+        </select>
+
+      </div>
+      <div class="col-md-6">
+        <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeId == '6c80f302-d3eb-11ea-9cdb-06a49e672dea' ||
+        homeService.editScreenDetails.contents[this.index].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3'">
+          <label class="d-block section-header">Display Time</label>
+          <input type="number" class="form-control w-25 d-inline-block" [min]="0"
+            [(ngModel)]="homeService.editScreenDetails.contents[this.index].itemDisplayTime" /><span
+            class="d-inline-block ml-1">Sec</span>
+          <div
+            *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3')">
+            <label class="d-block section-header mt-4">Transition Effect</label>
+            <!-- <ngx-select [items]="imageTransitionEffectsArr" [allowClear]="false" placeholder="Select Transition"
+              class="w-50" (select)="selectedTransitionType($event)">
+            </ngx-select> -->
+            <select class="w-50" name="Select Transition" class="form-control" id="select Transition" #selectTransition
+              (change)="selectedTransitionType(selectTransition.value)">
+              <option disabled [selected]="selectedTransitionName == 'Select Transition'" value="Select Transition">
+                Select Transition
+              </option>
+              <option [selected]="selectedTransitionName == tr" *ngFor="let tr of imageTransitionEffectsArr;"
+                [value]="tr">
+                {{tr}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div title="widget refersh time"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '13ce14bc-e2ab-11ea-9cdb-06a49e672dea')">
+          <label class="d-block section-header">Refresh Time</label>
+          <input type="number" class="form-control w-25 d-inline-block" [min]="0"
+            [(ngModel)]="homeService.editScreenDetails.contents[this.index].itemDisplayTime" /><span
+            class="d-inline-block ml-1">Sec</span>
+        </div>
+      </div>
+      <div class="col-md-12 mt-4 pl-0">
+        <div class="image-section"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3')">
+          <label class="d-block section-header">Images</label>
+          <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length == 0 ; else images">
+            <div class="flex-container">
+              <ul *ngFor="let item of homeService.noExistingData">
+                <li style="list-style: none; padding: 1rem; flex: 0 0 33.333333%;">
+                  <img [src]="item.src" class="flex-item" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <ng-template #images>
+            <div
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId != '8f722385-d2ee-11ea-becb-288217eb58f3'">
+              <div class="flex-container">
+                <ul *ngFor="let item of homeService.noExistingData">
+                  <li style="list-style: none; padding: 1rem;">
+                    <img [src]="item.src" class="flex-item"/>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId == '8f722385-d2ee-11ea-becb-288217eb58f3'">
+              <!-- <div class="row" cdkDropList (cdkDropListDropped)="dropImages($event)">
+              <div class="drop-zone col-2"
+                *ngFor="let item of homeService.editScreenDetails.contents[this.index].contentTypeItems" cdkDrag>
+                <img *ngIf="item.targetUrl == ''" [src]="item.src" style="height: 8rem;width: 8rem;" />
+                <img *ngIf="item.targetUrl != ''" [src]="item.targetUrl  | imageJwt | async"
+                  style="height: 8rem;width: 8rem;" />
+              </div>
+            </div> -->
+              <div cdkDropListGroup
+                class="flex-container">
+                <ul
+                  *ngFor="let item of homeService.editScreenDetails.contents[this.index].contentTypeItems;let i=index">
+                  <li style="list-style: none; padding: 1rem;" cdkDropList cdkDropListOrientation="horizontal"
+                    [cdkDropListData]="{item:item,index:i}" (cdkDropListDropped)="dropImages($event)">
+                    <div class="image-container">
+                      <img class="img flex-item" *ngIf="item.targetUrl == ''" [src]="item.src" cdkDrag />
+                      <div *ngIf="item.targetUrl != ''" cdkDrag>
+                        <div *ngIf="item.targetUrl  | imageJwt | async; else loading">
+                          <img class="img flex-item" [src]="item.targetUrl  | imageJwt | async" />
+                        </div>
+                        <ng-template #loading>
+                          <div class="la-line-spin-fade-rotating la-2x">
+                            <div></div>
+                            <div></div>
+                          </div>
+                        </ng-template>
+                      </div>
+
+                      <div class="action-buttons">
+                        <input class="action-icon" type="image" src="../../assets/images/WallModule/edit_image.svg"
+                          (click)="uploadImagePopup()" />
+                        <input class="action-icon" type="image" src="../../assets/images/WallModule/delete_img.svg"
+                          (click)="deleteContent(i)" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="parent" style="display: flex;flex-wrap: wrap;" cdkDropList (cdkDropListDropped)="dropImages($event)">
+              <div class="child" style="flex: 0 0 21%;" cdkDrag
+                *ngFor="let item of homeService.editScreenDetails.contents[this.index].contentTypeItems">
+                <img *ngIf="item.targetUrl == ''" [src]="item.src" style="height: 10rem;width: 10rem;" />
+                <img *ngIf="item.targetUrl != ''" [src]="item.targetUrl  | imageJwt | async"
+                  style="height: 10rem;width: 10rem;" />
+              </div>
+            </div> -->
+            </div>
+          </ng-template>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="add-image-btn text-center p-2" style="margin: 2rem;cursor: pointer;"
+                (click)="uploadImagePopup()">
+                <img class="add-btn-img" src="../../../assets/images/WallModule/add-plus-button.svg"> Add
+                Image</div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+        </div>
+
+        <div class="social-media-section"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == 'aa666ce2-d555-11ea-9cdb-06a49e672dea')">
+          <label class="d-block section-header">Social Media Feeds</label>
+          <div class="social-flex-container">
+            <button *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length == 0"
+              (click)="uploadFeedPopup()" class="form-control d-inline-block" style="flex: 0 0 49%;">Click Edit to add
+              your social
+              media content</button>
+
+            <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length != 0"
+              style="flex: 0 0 49%;">
+              <button
+                *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId != 'aa666ce2-d555-11ea-9cdb-06a49e672dea'"
+                (click)="uploadFeedPopup()" class="form-control d-inline-block">Click Edit to add your social
+                media content</button>
+              <button
+                *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId == 'aa666ce2-d555-11ea-9cdb-06a49e672dea'"
+                (click)="uploadFeedPopup()" class="form-control d-inline-block">
+                {{homeService.editScreenDetails.contents[this.index].contentTypeItems[0].name}}</button>
+            </div>
+            <span class="edit-media-content"><img (click)="uploadFeedPopup()" class="ml-2 pl-1 position-relative"
+                src="../../../assets/images/WallModule/edit-icon.png"></span>
+            <span class="delete-media-content"><img class="ml-2 pl-1 position-relative" (click)="deleteContent()"
+                src="../../../assets/images/WallModule/delete-icon.png"></span>
+          </div>
+        </div>
+
+        <div class="video-section"
+          *ngIf="(homeService.editScreenDetails.contents[this.index].contentTypeId == '6c80f302-d3eb-11ea-9cdb-06a49e672dea')">
+          <label class="d-block section-header">Videos</label>
+          <div *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems.length == 0 ; else videos">
+            <div class="flex-container">
+              <ul *ngFor="let item of homeService.noExistingData">
+                <li style="list-style: none; padding: 1rem;">
+                  <img [src]="item.src" style="height: 8rem;width: 8rem;" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <ng-template #videos>
+            <div
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId == '6c80f302-d3eb-11ea-9cdb-06a49e672dea'">
+              <div cdkDropListGroup
+                style="display: flex;flex-wrap: wrap; width: 59rem; max-height: 38rem !important;overflow-y: overlay">
+                <ul
+                  *ngFor="let item of homeService.editScreenDetails.contents[this.index].contentTypeItems;let i=index">
+                  <li style="list-style: none; padding: 1rem;" cdkDropList cdkDropListOrientation="horizontal"
+                    [cdkDropListData]="{item:item,index:i}" (cdkDropListDropped)="dropImages($event)">
+                    <div class="image-container">
+                      <img [src]="item.src | imageJwt | async" cdkDrag style="width: 8rem;
+                      height: 8rem;" />
+                      <div class="action-buttons">
+                        <input class="action-icon" type="image" src="../../assets/images/WallModule/edit_image.svg"
+                          (click)="uploadImagePopup()" />
+                        <input class="action-icon" type="image" src="../../assets/images/WallModule/delete_img.svg"
+                          (click)="deleteContent(i)" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div
+              *ngIf="homeService.editScreenDetails.contents[this.index].contentTypeItems[0].contentTypeId != '6c80f302-d3eb-11ea-9cdb-06a49e672dea'">
+              <!-- <div
+                style="display: flex;flex-wrap: wrap; width: 59rem; max-height: 38rem !important;overflow-y: overlay">
+                <ul *ngFor="let item of homeService.noExistingData">
+                  <li style="list-style: none; padding: 1rem;">
+                    <img [src]="item.src" style="height: 10rem;width: 10rem;" />
+                  </li>
+                </ul>
+              </div> -->
+              <div class="flex-container">
+                <ul *ngFor="let item of homeService.noExistingData">
+                  <li style="list-style: none; padding: 1rem;">
+                    <img [src]="item.src" style="height: 8rem;width: 8rem;" />
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ng-template>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="add-image-btn text-center p-2" style="margin: 2rem;cursor: pointer;"
+                (click)="uploadVideoPopup()">
+                <img class="add-btn-img" src="../../../assets/images/WallModule/add-plus-button.svg"> Add
+                Video</div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+        </div>
+
+        <div class="widgets-section" *ngIf="
+homeService.editScreenDetails.contents[this.index].contentTypeId ==
+'13ce14bc-e2ab-11ea-9cdb-06a49e672dea'
+">
+          <label class="d-block section-header">Widgets</label>
+          <div class="widgets-flex-container">
+            <button *ngIf="
+homeService.editScreenDetails.contents[this.index]
+.contentTypeItems.length == 0
+" (click)="uploadWidgtPopup()" class="w-50 form-control d-inline-block" style="flex: 0 0 49%">
+              Click Edit to add your Widget content
+            </button>
+
+            <div *ngIf="
+homeService.editScreenDetails.contents[this.index]
+.contentTypeItems.length != 0
+" style="flex: 0 0 49%">
+              <button *ngIf="
+homeService.editScreenDetails.contents[this.index]
+.contentTypeItems[0].contentTypeId !=
+'13ce14bc-e2ab-11ea-9cdb-06a49e672dea'
+" (click)="uploadWidgtPopup()" class="form-control d-inline-block">
+                Click Edit to add your Widget content
+              </button>
+              <button *ngIf="
+homeService.editScreenDetails.contents[this.index]
+.contentTypeItems[0].contentTypeId ==
+'13ce14bc-e2ab-11ea-9cdb-06a49e672dea'
+" (click)="uploadWidgtPopup()" class="form-control d-inline-block">
+                {{
+homeService.editScreenDetails.contents[this.index]
+.contentTypeItems[0].name
+}}
+              </button>
+            </div>
+            <span class="edit-media-content"><img class="ml-2 pl-1 position-relative"
+                src="../../../assets/images/WallModule/edit-icon.png" (click)="uploadWidgtPopup()" /></span>
+            <span class="delete-media-content"><img class="ml-2 pl-1 position-relative" (click)="deleteContent()"
+                src="../../../assets/images/WallModule/delete-icon.png" /></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-3 pr-0">
+    <div class="row">
+      <label class="d-block section-header">Layout</label>
+    </div>
+    <div class="row">
+      <img *ngIf="this.layoutBoxImage == 'Layout100-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/100-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout5050-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/5050-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout5050-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/5050-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout7525-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/7525-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout7525-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/7525-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout2575-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/2575-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout2575-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/2575-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout502525-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/502525-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout502525-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/502525-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout502525-2'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/502525-3.svg">
+      <!--  -->
+      <img *ngIf="this.layoutBoxImage == 'Layout252550-0'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/252550-1.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout252550-1'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/252550-2.svg">
+
+      <img *ngIf="this.layoutBoxImage == 'Layout252550-2'" style="height: 8rem; width: 9rem;float: left;"
+        class="add-btn-img" src="../../../assets/images/designScreen/selected-box/252550-3.svg">
+    </div>
+
+    <label class="d-block section-header mt-4">Padding</label>
+    <div class="float-left mb-3" style="width: 100%;">
+      <div>
+        <input type="number" class="d-inline-block padding-input form-control border-right-0"  [min]="0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingTop" />
+
+        <input type="number" class="d-inline-block padding-input form-control border-right-0"  [min]="0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingBottom" />
+        <span class="padding-unit padding-input">%</span>
+      </div>
+      <div>
+        <span class="padding-input-label mt-2 float-left">Top</span>
+        <span class="padding-input-label mt-2 float-left">Bottom</span>
+      </div>
+    </div>
+    <div class="mt-4 float-left">
+      <div>
+        <input type="number" class="d-inline-block padding-input form-control border-right-0" [min]="0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingLeft" />
+        <input type="number" class="d-inline-block padding-input form-control border-right-0" [min]="0"
+          [(ngModel)]="homeService.editScreenDetails.contents[this.index].paddingRight" />
+        <span class="padding-unit padding-input">%</span>
+      </div>
+      <div>
+        <span class="padding-input-label mt-2 float-left">Left</span>
+        <span class="padding-input-label mt-2 float-left">Right</span>
+      </div>
+    </div>
+  </div>
+</div>

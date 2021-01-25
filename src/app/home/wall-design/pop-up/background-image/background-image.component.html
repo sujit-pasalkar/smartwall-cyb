@@ -1,0 +1,61 @@
+<div class="login payment-layout">
+  <mat-dialog-content class="mat-typography payment-Scroll" style="overflow: inherit;">
+    <h4>Images</h4>
+    <div>
+      <label class="d-block">Select</label>
+      <div *ngIf="!addingImg">
+        <p-carousel class="upload-img-carousel" [value]="imageVideoList.length != 0 ? imageVideoList : homeService.noExistingData" [numVisible]="3" [numScroll]="3"
+          [circular]="true">
+          <ng-template let-item pTemplate="item">
+            <div class="product-item position-relative">
+              <div class="product-item-content">
+                <span class="slider-img">
+                  <img [src]="item.src" />
+                </span>
+                <div *ngIf="imageVideoList.length != 0 " class="mt-5 image-actions">
+                  <span class="check-image d-inline-block">
+                    <!-- <mat-checkbox *ngIf="item.selectable" class="design-question-checkbox" (click)="selectBgImage(item.index)" #checkbox>
+                    </mat-checkbox> -->
+                    <!-- remove clicck---add condtion for check uncheck -->
+                    <mat-radio-button class="design-question-checkbox"
+                    (change)="selectBgImage($event,item.index)"></mat-radio-button>
+                    <!-- <input type="radio" name="" id=""> -->
+                  </span>
+
+                  <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2 bg-transparent border-0">
+                          <img src="../../assets/images/WallModule/edit_image.svg" /></p-button> -->
+                  <!-- <button type="button"
+                      styleClass="p-button-success p-button-rounded p-mr-2 bg-transparent border-0">
+                      <img src="../../assets/images/WallModule/delete_img.svg" /></button> -->
+                  <!-- <button type="button">
+                        <img src="../../assets/images/WallModule/delete_img.svg" />
+                      </button> -->
+                  <span style="display: inline" (click)="deleteUploadedImage(item.index)">
+                    <input type="image" src="../../assets/images/WallModule/delete_img.svg" /></span>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+      <!-- to get local image- having proble showing 2 -->
+      <span class="ortext-container d-block text-center mt-3 mb-3"><span class="position-relative">OR</span></span>
+      <div class="text-center p-2 mt-4">
+        <label class="custom-file-upload">
+          <input type="file" accept="image/jpeg, image/png,image/jpg" name="selectedFile" (change)="uploadImage($event)"
+             style="display: none;" />
+          <div class="add-icon">
+            <img style="width: 1rem;" src="../../../assets/images/WallModule/add-plus-button.svg" alt="Add Logo Image">
+            <span>&nbsp; Upload</span>
+          </div>
+        </label>
+      </div>
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" style="padding-left:8px">
+    <button class="btn-green" mat-button (click)="save()">Save</button>
+    <button class="btn-gray ml-2" mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  </mat-dialog-actions>
+</div>
+

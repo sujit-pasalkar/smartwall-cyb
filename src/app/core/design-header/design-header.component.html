@@ -1,0 +1,39 @@
+<header class="agency-header" id="sa-header">
+    <nav class="navbar navbar-expand-sm navbar2">
+        <div class="col-md-3 col-7 navbar-brand">
+            <div id="wallLabelWrapper" class="form-group mb-0 edit-wall">
+                <!-- <input id="wallLable" readonly class="form-control wall-label-edit" maxlength="255" [(ngModel)]="labelText"/> -->
+                <!-- <input id="wallLable" readonly class="form-control wall-label-edit" [ngClass]="{'edit-label' : editIcon}" maxlength="255" [(ngModel)]="labelText" (onchange)="checkInputEmpty()">
+                <div class="save" *ngIf="editIcon" id="saveWallLabel">
+                    <button type="submit" class="edit-action-btn"><img *ngIf="labelText" (click)="editLabel()"
+                    id="save" title="Save" alt="edit" src="../../../assets/images/WallModule/done_48px.svg"></button>
+                    <a href="javascript:void(0);" class="edit-action-btn">
+                        <img (click)="emptylabel()" title="Cancel" alt="edit" src="../../../assets/images/WallModule/wrong.svg">
+                    </a>
+                </div> -->
+
+                <!-- <div class="edit-action">
+                    <button type="submit" class="edit-action-btn"><img src="assets/images/icon27@3x.png" width="15" alt="Check"></button>
+                    <a href="javascript:void(0);" class="edit-action-btn close-btn"><img src="assets/images/icon28@3x.png" width="11" alt="Close"></a>
+                  </div> -->
+
+
+                <!-- <div class="edit" *ngIf="!editIcon">
+                    <img (click)="LabelChange()" title="Edit" alt="edit" src="../../../assets/images/WallModule/edit-icon.png">
+                </div> -->
+            </div>
+            <!-- <div *ngIf="showErrorMessage" class="error-message" style="position: inherit !important;">
+                {{errorInWallName}}
+            </div> -->
+        </div>
+
+        <ul class="col-md-9 col-5 wall-nav navbar-nav">
+            <!-- <li class="nav-item">
+                <a routerLink="wall-setting" routerLinkActive="active-route" class="nav-link" (click)="emptylabel()">Settings</a>
+            </li> -->
+            <li class="nav-item">
+                <a [routerLink]="['/wall-design']" routerLinkActive="active-route" class=" active-route nav-link" (click)="navigate()">Design</a >
+            </li>
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,13 @@
+<mat-dialog-content class="mat-typography text-center">
+  <img *ngIf="data.code == '200'" style="height: 10rem;" class="img-size mb-4 content-img" src="../../../../../assets/images/designScreen/deploy_success.svg" alt="deploy success" />
+  <img *ngIf="data.code != '200'" style="height: 10rem;" class="img-size mb-4 content-img" src="../../../../../assets/images/designScreen/deploy_fail.svg" alt="deploy success" />
+
+  <h4 *ngIf="data.code == '200'" class="mb-0 mt-5">{{data.msg}}</h4>
+  <h4 *ngIf="data.code != '200'" class="mb-0 mt-5">{{data.msg}}</h4>
+  <br>
+
+  <p *ngIf="data.code != '200'">Please contact support.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center" style="padding-left:8px">
+  <button class="btn-green" mat-button [mat-dialog-close]="true">Ok</button>
+</mat-dialog-actions>

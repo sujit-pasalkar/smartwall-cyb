@@ -1,0 +1,34 @@
+<div class="login payment-layout">
+  <mat-dialog-content class="mat-typography payment-Scroll" style="overflow: inherit;margin: 0 -24px !important;">
+    <h4>Social Media Feed</h4>
+    <div>
+      <!-- ng select existing feeds-->
+      <label class="section-header d-block mb-3 mt-5">Select from existing feeds</label>
+      <!-- <select class="form-control">
+        <option>Wall 1</option>
+        <option>Wall 2</option>
+        <option>Wall 3</option>
+      </select> -->
+      <ngx-select
+            [items]="homeService.existingTagBoxUrl" [allowClear]="false" placeholder="Select feed" class="w-50"
+            optionTextField="name"
+            optionValueField="contentTypeItemId"
+            (select)="selectedFromExisting($event)">
+          </ngx-select>
+
+      <span class="ortext-container d-block text-center mt-3 mb-3"><span class="position-relative">OR</span></span>
+      <!-- <div class="mt-4" style="width: 100%;">
+      </div> -->
+      <label class="d-block heading">Create New</label>
+      <label class="section-header d-block">Name</label>
+      <input [(ngModel)]="addFeedObject[0].name" type="text" class="form-control" placeholder="Type Feed name.." />
+      <label class="section-header d-block mt-3">URL</label>
+      <input [(ngModel)]="addFeedObject[0].targetUrl" type="text" class="form-control" placeholder="Type URL" />
+    </div>
+    <!-- <video src=""></video> -->
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" style="padding-left:8px">
+    <button class="btn-green" mat-button (click)="save()">Save</button>
+    <button class="btn-gray ml-2" mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="196" height="179" viewBox="0 0 196 179">
+  <g id="Group_93840" data-name="Group 93840" transform="translate(-621 -3626)">
+    <g id="Group_93825" data-name="Group 93825" transform="translate(-910 2666)">
+      <g id="Rectangle_412" data-name="Rectangle 412" transform="translate(1531 960)" fill="#f5f5f5" stroke="#949caf" stroke-width="1" opacity="0.326">
+        <rect width="196" height="179" rx="5" stroke="none"/>
+        <rect x="0.5" y="0.5" width="195" height="178" rx="4.5" fill="none"/>
+      </g>
+      <g id="Group_12815" data-name="Group 12815" transform="translate(1536 966)">
+        <g id="Group_10582" data-name="Group 10582">
+          <rect id="Rectangle_17306" data-name="Rectangle 17306" width="186" height="82" rx="4" fill="#00bfb3"/>
+          <rect id="Rectangle_17307" data-name="Rectangle 17307" width="91" height="82" rx="4" transform="translate(0 86)" fill="#dfdfdf"/>
+          <rect id="Rectangle_17414" data-name="Rectangle 17414" width="91" height="82" rx="4" transform="translate(95 86)" fill="#dfdfdf"/>
+        </g>
+        <text id="_1" data-name="1" transform="translate(87 49)" fill="#fff" font-size="20" font-family="Roboto-Black, Roboto" font-weight="800"><tspan x="0" y="0">1</tspan></text>
+        <text id="_2" data-name="2" transform="translate(40 135)" fill="#838383" font-size="20" font-family="Roboto-Black, Roboto" font-weight="800"><tspan x="0" y="0">2</tspan></text>
+        <text id="_3" data-name="3" transform="translate(135 135)" fill="#838383" font-size="20" font-family="Roboto-Black, Roboto" font-weight="800"><tspan x="0" y="0">3</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

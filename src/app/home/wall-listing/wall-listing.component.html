@@ -1,0 +1,136 @@
+<ngx-spinner size="medium" bdColor="rgba(255,255,255,0.8)" color="#fff" type="la-line-spin-fade-rotating">
+  <div class="la-line-spin-fade-rotating la-3x">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ngx-spinner>
+<div class="mainWallWrapper" style="padding: 4rem;">
+  <div class="wall-page-header flex-wrap" id="wall-page-header">
+    <div class="heading-text">
+      <h1>{{homeService.selectedAccountName}}</h1>
+    </div>
+    <div class="search-section col-md-6 text-right pr-0">
+      <input class="search" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)">
+      <button class="btn-green-round" mat-button (click)="createWallPopUp()">Create Wall</button>
+    </div>
+  </div>
+  <div class="wall-status flex-wrap" id="wall-status">
+    <div class="heading-text col-md-2 plr-0">
+      <label></label>
+      <!-- Status -->
+      <div>
+        <!-- <p-multiSelect [options]="wallTypes" [(ngModel)]="selectedtype" defaultLabel="Please Select"
+          (onChange)="selectChangeHandler(selectedtype)"></p-multiSelect> -->
+      </div>
+    </div>
+    <div class="listing-pagination">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+  <!------- wall listing table ------>
+  <div class="listing-table" (window:resize)="calcHeight();">
+    <div class="mat-table-containter" id="matTableContainter">
+      <table mat-table [dataSource]="dataSource" matSort class="">
+
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="wallName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Wall </th>
+          <td mat-cell *matCellDef="let element; let wallNameIndex = index" title="Update wall name" (click)="clickWallName(wallNameIndex)">
+            <a *ngIf="!element.editWallName" href="javascript:void(0)"
+              >{{element.wallName}}</a>
+
+            <input id="{{element.wallName}}" *ngIf="element.editWallName" class="" type="text" placeholder="{{element.wallName}}"
+              [(ngModel)]="element.wallName" appAutofocus>
+            <!-- <div class="nameClose" *ngIf="element.editWallName">
+              <span type="submit" class="edit-action-btn" (click)="saveWallUpdates(wallNameIndex)">
+                <img title="Save" alt="edit" src="../../../assets/images/WallModule/done_48px.svg">
+              </span>
+              <span class="edit-action-btn" (click)="closeWallEditInput()">
+                <img title="Cancel" alt="edit" src="../../../assets/images/WallModule/wrong.svg">
+              </span>
+            </div> -->
+          </td>
+        </ng-container>
+
+        <!-- Label Column -->
+        <ng-container matColumnDef="wallLabel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
+          <td mat-cell *matCellDef="let element; let wallLabelIndex = index" title="Update wall label" (click)="clickWallLabel(wallLabelIndex)">
+            <a *ngIf="!element.editWallLabel" href="javascript:void(0)"
+              >{{element.wallLabel}}</a>
+            <input *ngIf="element.editWallLabel" type="text" placeholder={{element.wallLabel}}
+               [(ngModel)]="element.wallLabel" appAutofocus>
+
+            <!-- <div class="lableClose" *ngIf="element.editWallLabel">
+              <span type="submit" class="edit-action-btn" (click)="saveWallUpdates(wallLabelIndex)">
+                <img title="Save" alt="edit" src="../../../assets/images/WallModule/done_48px.svg">
+              </span>
+              <span class="edit-action-btn" (click)="closeWallEditInput()">
+                <img title="Cancel" alt="edit" src="../../../assets/images/WallModule/wrong.svg">
+              </span>
+            </div> -->
+          </td>
+        </ng-container>
+
+        <!-- Response Column -->
+        <ng-container matColumnDef="activeScreens">
+          <th mat-header-cell *matHeaderCellDef> Active Screens </th>
+          <td mat-cell *matCellDef="let element" class="response">
+            {{element.activeScreens}}
+            <!-- <div class="progress-wrap">
+                          <mat-progress-bar *ngIf="element.activeScreens !== 0 && element.wallQuota !== 0" mode="determinate" value="{{(element.activeScreens/element.wallQuota) * 100}}">
+                          </mat-progress-bar>
+                          <mat-progress-bar *ngIf="element.activeScreens === 0 || element.wallQuota === 0" mode="determinate" value="0"></mat-progress-bar>
+                          <span *ngIf="element.wallQuota > 0">{{element.activeScreens}}/{{element.wallQuota}}
+                          </span>
+                          <span *ngIf="element.wallQuota <=0 ">{{element.activeScreens}}/- </span>
+                      </div> -->
+          </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <!-- <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle [checked]="element.open" (change)="onChange($event, element.wallId, element.open)">
+            </mat-slide-toggle>
+          </td>
+        </ng-container> -->
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <a (click)="editWall(element.wallName, element.wallId)" title="Edit">
+              <img alt="edit" src="../../../assets/images/WallModule/edit-icon.png" />
+            </a>
+
+            <a (click)="deleteWallStatus(element.wallId,element.wallName)" title="Delete">
+              <img alt="delete" src="../../../assets/images/WallModule/delete-icon.png" /></a>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let rowIndex = index"></tr>
+      </table>
+    </div>
+    <br>
+    <div class="form-group customError" *ngIf="errMessageShow">
+      {{errMessage}}
+    </div>
+    <!-- <div class="form-group no-record-found" *ngIf="dataSource.data.length === 0">
+          No Records Found
+      </div> -->
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.section-header {
+    font-size: 1.0625rem;
+  }
+  
+  .ortext-container {
+    border-bottom:  1px solid #f6f6f6;
+  }
+  
+  .ortext-container span {
+    top: 10px;
+    background: #ffffff;
+    padding: 5px;
+  }
+  
+  .add-video-btn {
+    padding: 5px 7px;
+    border-radius: 4px;
+    margin-left: 1rem;
+    cursor: pointer;
+  }

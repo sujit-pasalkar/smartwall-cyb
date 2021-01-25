@@ -1,0 +1,30 @@
+p {
+  margin-bottom: 0;
+  line-height: 1.25rem;
+  color: #4b4f54;
+}
+
+.logo {
+  width: 6rem;
+}
+.password-modal-container {
+  text-align: center;
+  padding: 0.875rem 0 1rem;
+}
+.password-modal-container h2 {
+  margin: 1.5rem 0 1rem;
+  font-size: 1.375rem;
+  font-weight: 500;
+}
+
+/*  */
+.login-input-pg-dd {
+  height: 3.625rem;
+  border-radius: 0.5rem;
+  font-size: 1.063rem;
+  box-sizing: border-box;
+  transition: 0.3s;
+  color: #4B4F54;
+  font-weight: 400;
+  background: transparent;
+}

@@ -1,0 +1,17 @@
+.uploaded-file-name {
+    cursor: pointer;
+}
+
+a:not([href]):not([tabindex]):focus,
+a:not([href]):not([tabindex]):hover {
+    text-decoration: underline !important;
+}
+
+.okay-button {
+    margin-top: -3rem !important;
+}
+
+.page-not-found {
+    text-align: center;
+    margin-top: 20rem !important;
+}

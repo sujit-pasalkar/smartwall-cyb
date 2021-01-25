@@ -1,0 +1,324 @@
+<ngx-spinner size="medium" bdColor="rgba(255,255,255,0.8)" color="#fff" type="la-line-spin-fade-rotating">
+  <div class="la-line-spin-fade-rotating la-3x">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ngx-spinner>
+<div class="container-fluid" id="wallDesign" (window:resize)="calcHeightRight();calcHeight();calcHeightAddLabel()">
+  <div class="mainWallWrapper">
+    <!---------- Add wall-sidebar section --------- -->
+    <div class="wall-sidebar">
+      <div id="addScreenPanel">
+        <div class="add-layout btn-green" (click)="chooseLayout()">
+          <div class="content">Add Screen</div>
+          <div><img src="../../../assets/images/WallModule/add.svg"></div>
+        </div>
+
+        <!---------- Add Layout section --------- -->
+        <div class="layout-panel" [ngClass]="addScreenPanelSuccess ? 'success' : 'closew'">
+          <form [formGroup]="createScreenForm" (ngSubmit)="submitAddLayout()" class="login-main-form">
+            <div class="arrow-left"></div>
+            <div class="form-group layout-panel-header border-0">
+              <label for="label">Screen ID</label>
+              <input type="text" formControlName="editScreenId" saAutoFocus maxlength="50" class="form-control"
+                placeholder="Screen ID" />
+            </div>
+            <div class="form-group layout-panel-header">
+              <label for="label">Password</label>
+              <input id="password-field" placeholder="Password" type="password" maxlength="50" class="form-control"
+                formControlName="editScreenPassword"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$"
+                autocomplete="new-password" onblur="this.setAttribute('readonly', 'readonly');"
+                onfocus="this.removeAttribute('readonly');" readonly>
+
+              <div *ngIf="f.editScreenPassword.touched && f.editScreenPassword.errors">
+                <div *ngIf="f.editScreenPassword.errors.required" class="error-message">Password is required</div>
+              </div>
+              <div
+                *ngIf="f.editScreenPassword.touched && f.editScreenPassword.errors?.pattern && f.editScreenPassword.invalid">
+                <div class="error-message">Password must be at least 8 characters and have 1 uppercase, 1 special
+                  character
+                  and 1 numeric value.</div>
+              </div>
+
+            </div>
+            <div class="layout-panel-header">
+              <label class="choose-layout">Choose Layout</label>
+              <div class="layout-type-images">
+                <div class="row mb-3">
+                  <div class="col-md-4 text-center" (click)="changeLayout(1)">
+                    <img *ngIf="choosenLayout == 1" src="../../../assets/images/designScreen/layout/layout1_on.svg" />
+                    <img *ngIf="choosenLayout != 1" src="../../../assets/images/designScreen/layout/layout1_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(2)">
+                    <img *ngIf="choosenLayout == 2" src="../../../assets/images/designScreen/layout/layout2_on.svg" />
+                    <img *ngIf="choosenLayout != 2" src="../../../assets/images/designScreen/layout/layout2_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(3)">
+                    <img *ngIf="choosenLayout == 3" src="../../../assets/images/designScreen/layout/layout3_on.svg" />
+                    <img *ngIf="choosenLayout != 3" src="../../../assets/images/designScreen/layout/layout3_off.svg" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-center" (click)="changeLayout(4)">
+                    <img *ngIf="choosenLayout == 4" src="../../../assets/images/designScreen/layout/layout6_on.svg" />
+                    <img *ngIf="choosenLayout != 4" src="../../../assets/images/designScreen/layout/layout6_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(5)">
+                    <img *ngIf="choosenLayout == 5" src="../../../assets/images/designScreen/layout/layout5_on.svg" />
+                    <img *ngIf="choosenLayout != 5" src="../../../assets/images/designScreen/layout/layout5_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(6)" style="display: none;">
+                    <img *ngIf="choosenLayout == 6" src="../../../assets/images/designScreen/layout/layout4_on.svg" />
+                    <img *ngIf="choosenLayout != 6" src="../../../assets/images/designScreen/layout/layout4_off.svg" />
+                  </div>
+                </div>
+                <span class="ortext position-relative">OR</span>
+              </div>
+            </div>
+            <div class="layout-panel-header">
+              <label class="choose-layout d-block mb-2">Choose content from</label>
+
+              <select name="Select LayoutType" class="form-control" id="select LayoutType" #selectLayoutType
+                (change)="selectedLayoutType(selectLayoutType.value)">
+                <option disabled [selected]="selectedContent == 'Select content'" value="Select content">Select content
+                </option>
+                <option [selected]="selectedContent == type.screenId"
+                  *ngFor="let type of chooseFromListArray;" [value]="type.userId">
+                  {{type.screenId}}
+                </option>
+              </select>
+
+            </div>
+            <div class="layout-panel-header">
+              <button type="submit" class="btn-green" style="width:48%"
+                [disabled]="!createScreenForm.valid">Add</button>
+              <button type="reset" class="btn-gray ml-2 pull-right" style="width:48%"
+                (click)="clickEventM()">Cancel</button>
+              <div style="text-align: center;padding-top: 1rem;" class="error-message">{{addScreenError}}</div>
+            </div>
+          </form>
+        </div>
+
+        <!-- change layout panel from -->
+        <div id="changeLayoutPanelSuccess">
+        <div class="layout-panel" [ngClass]="changeLayoutPanelSuccess ? 'success' : 'closew'">
+          <!-- <form [formGroup]="createScreenForm" (ngSubmit)="submitAddLayout()" class="login-main-form"> -->
+            <div class="arrow-left"></div>
+
+            <div class="layout-panel-header">
+              <label class="choose-layout">Change Layout</label>
+              <div class="layout-type-images">
+                <div class="row mb-3">
+                  <div class="col-md-4 text-center" (click)="changeLayout(1)">
+                    <img *ngIf="choosenLayout == 1" src="../../../assets/images/designScreen/layout/layout1_on.svg" />
+                    <img *ngIf="choosenLayout != 1" src="../../../assets/images/designScreen/layout/layout1_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(2)">
+                    <img *ngIf="choosenLayout == 2" src="../../../assets/images/designScreen/layout/layout2_on.svg" />
+                    <img *ngIf="choosenLayout != 2" src="../../../assets/images/designScreen/layout/layout2_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(3)">
+                    <img *ngIf="choosenLayout == 3" src="../../../assets/images/designScreen/layout/layout3_on.svg" />
+                    <img *ngIf="choosenLayout != 3" src="../../../assets/images/designScreen/layout/layout3_off.svg" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-center" (click)="changeLayout(4)">
+                    <img *ngIf="choosenLayout == 4" src="../../../assets/images/designScreen/layout/layout6_on.svg" />
+                    <img *ngIf="choosenLayout != 4" src="../../../assets/images/designScreen/layout/layout6_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(5)">
+                    <img *ngIf="choosenLayout == 5" src="../../../assets/images/designScreen/layout/layout5_on.svg" />
+                    <img *ngIf="choosenLayout != 5" src="../../../assets/images/designScreen/layout/layout5_off.svg" />
+                  </div>
+                  <div class="col-md-4 text-center" (click)="changeLayout(6)" style="display: none;">
+                    <img *ngIf="choosenLayout == 6" src="../../../assets/images/designScreen/layout/layout4_on.svg" />
+                    <img *ngIf="choosenLayout != 6" src="../../../assets/images/designScreen/layout/layout4_off.svg" />
+                  </div>
+                </div>
+                <span class="ortext position-relative">OR</span>
+              </div>
+            </div>
+            <div class="layout-panel-header">
+              <label class="choose-layout d-block mb-2 pt-5">Choose content from</label>
+              <select name="Select LayoutType" class="form-control" id="select LayoutType" #changeLayoutType
+                (change)="selectedLayoutType(changeLayoutType.value)">
+                <option disabled [selected]="selectedContent == 'Select content'" value="Select content">Select content
+                </option>
+                <option [selected]="selectedContent == type.screenId"
+                  *ngFor="let type of chooseFromListArray;" [value]="type.userId">
+                  {{type.screenId}}
+                </option>
+              </select>
+            </div>
+            <div class="layout-panel-header">
+              <button type="submit" class="btn-green" style="width:48%" (click)="changeLayoutPanel()">Save</button>
+              <button type="reset" class="btn-gray ml-2 pull-right" style="width:48%"
+                (click)="clickEventM()">Cancel</button>
+              <div style="text-align: center;padding-top: 1rem;" class="error-message">{{addScreenError}}</div>
+            </div>
+          <!-- </form> -->
+        </div>
+      </div>
+      </div>
+
+      <div class="layout-list m-0" id='screenPanelAddLabel' cdkDropList (cdkDropListDropped)="dropScreenList($event)">
+        <div cdkDrag
+          [ngClass]="{ 'selected-wall-list': selectedScreenUserId == addedScreen.userId, 'layout-list-item': selectedScreenUserId != addedScreen.userId }"
+          class="row ml-0 layout-item" *ngFor="let addedScreen of screenListArray; let i = index" (click)="getScreenDetails(addedScreen.userId)">
+          <!-- <img class="layout-item-img ml-2" src="../../../assets/images/designScreen/addScreenList/addScreenList-layout2.svg"> -->
+
+          <img *ngIf="addedScreen.layoutTypeName == 'Layout100'"  class="layout-item-img ml-2"
+            src="../../../assets/images/designScreen/layout/layout1_off.svg">
+            <img *ngIf="addedScreen.layoutTypeName == 'Layout5050'"  class="layout-item-img ml-2"
+            src="../../../assets/images/designScreen/layout/layout2_off.svg">
+            <img *ngIf="addedScreen.layoutTypeName == 'Layout2575'"  class="layout-item-img ml-2"
+            src="../../../assets/images/designScreen/layout/layout3_off.svg">
+            <img *ngIf="addedScreen.layoutTypeName == 'Layout502525'"  class="layout-item-img ml-2"
+            src="../../../assets/images/designScreen/layout/layout6_off.svg">
+            <img *ngIf="addedScreen.layoutTypeName == 'Layout252550'"  class="layout-item-img ml-2"
+            src="../../../assets/images/designScreen/layout/layout5_off.svg">
+
+
+          <span class="d-inline-block ml-2 mr-2 layout-name">{{addedScreen.screenId}}</span>
+          <img (click)="chooseChangeLayout(i)" class="layout-icon mr-2" src="../../../assets/images/designScreen/addScreenList/addScreenList-icon.svg">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="design-content" id="design-content" style="max-height: 729px; overflow-y: auto;"
+      (window:resize)="calcHeightRight()">
+      <div class="col-sm-12" class="wall-editor" *ngIf="!bannerImage">
+        <div class="layout-editor-header position-relative">
+          <div class="d-flex">
+            <div class="layout-type">
+              <div class="layout-type-label">Screen ID</div>
+              <span class="layout-type-detail">{{homeService.editScreenDetails.screenId}}</span>
+            </div>
+            <div class="layout-type border-0">
+              <div class="layout-type-label">Password</div>
+              <span class="pwd-edit" *ngIf="!changePassword" (click)="changeScreenPassword()">
+                <img class="position-relative" src="../../../assets/images/WallModule/edit-icon.png" />
+              </span>
+              <div *ngIf="changePassword">
+                <input id="changeScreenPassword" type="password" class="d-inline-block pwd-input"
+                  [(ngModel)]="homeService.editScreenDetails.password">
+                <!-- <div class="save-pwd">
+                  <span type="submit" class="edit-action-btn">
+                    <img title="Save" alt="edit" src="../../../assets/images/WallModule/done_48px.svg">
+                  </span>
+                  <span class="edit-action-btn">
+                    <img title="Cancel" alt="edit" src="../../../assets/images/WallModule/wrong.svg">
+                  </span>
+                </div> -->
+              </div>
+            </div>
+            <div class="text-right layout-type-btn" style="border-right: none;">
+              <button class=" btn-green float-left" (click)="deploy()">Deploy</button>
+              <button class=" btn-green" (click)="preview()">Preview</button>
+              <button class=" btn-green ml-2" (click)="save()">Save</button>
+              <button class=" btn-gray ml-2" (click)="cancel()">Cancel </button>
+            </div>
+          </div>
+        </div>
+        <div class="content-wrapper mt-3">
+          <div class="row m-0">
+            <div class="col-md-9 pl-0">
+              <div>
+                <label class="section-header d-block">Description</label>
+                <textarea class="form-control desc-text border-bottom-0" id="textarealength" maxlength="1500"
+                  placeholder="Add here" [(ngModel)]="homeService.editScreenDetails.description"
+                  appAutofocus></textarea>
+                <div id="the-count" class="text-right char-count pl-3 pr-3 pt-2 pb-2">
+                  <span>Characters : </span>
+                  <span id="current">0</span>
+                  <span id="maximum">/1500</span>
+                </div>
+              </div>
+              <div>
+                <label class="section-header d-block mb-3 mt-5">Add screen to wall</label>
+                <div class="row">
+                  <div class="col-md-5">
+                    <label class="heading">Available Walls</label>
+                    <div class="selected-walls">
+                      <ul *ngFor="let availableWalls of homeService.editScreenDetails.availableWalls">
+                        <li (click)="selectedClientId(availableWalls.wallId)">{{availableWalls.wallName}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-2 arrow-container">
+                    <img src="../../../assets/images/designScreen/backword-forword-arrow.svg" (click)="removeSelectedClientId()">
+                    </div>
+                  <div class="col-md-5">
+                    <label class="heading">Selected Walls</label>
+                    <div class="selected-walls">
+                      <ul *ngFor="let selectedWall of homeService.editScreenDetails.selectedWalls">
+                        <li>{{selectedWall.wallName}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 pr-0">
+              <label class="section-header">Background Image</label>
+              <!-- <input type="file" name="image" id="uploadImage" (change)="uploadImage($event)"> -->
+              <div [ngClass]="{'upload-image-wrapper': homeService.editScreenDetails.bgImageUrl == '',
+              'uploaded-image-wrapper': homeService.editScreenDetails.bgImageUrl != '' }"
+                class="upload-image-wrapper d-flex" (click)="uploadBgImagePopup()">
+                <span class="mx-auto my-auto upload-text" *ngIf="homeService.editScreenDetails.bgImageUrl == ''">
+                  <img class="add-btn-img" src="../../../assets/images/WallModule/add-plus-button.svg"> Upload
+                  Image
+                </span>
+
+                <span *ngIf="homeService.editScreenDetails.bgImageUrl != ''">
+                  <img class="uploaded-image" [src]="homeService.editScreenDetails.bgImageUrl | imageJwt | async"
+                    alt="">
+                </span>
+              </div>
+
+              <!-- <label [ngClass]="selectedBackgroungImage ? 'custom-file-uploadAfter' : 'custom-file-upload'">
+                <input *ngIf="!selectedBackgroungImage" type="file" accept="image/jpeg, image/png,image/jpg"
+                  name="selectedFile" (change)="uploadImage($event);" (click)="$event.target.value = null"
+                  style="display: none;" />
+                <div class="add-icon">
+                  <img *ngIf="!selectedBackgroungImage" style="width: 1rem;"
+                    src="../../../assets/images/WallModule/add-plus-button.svg" alt="Add Logo Image">
+                  <span *ngIf="!selectedBackgroungImage">&nbsp; Upload Image</span>
+                </div>
+                <img id="bgImage" *ngIf="selectedBackgroungImage" class="logo-image" src="" alt="Logo Image">
+
+              </label> -->
+
+            </div>
+          </div>
+          <div>
+            <mat-tab-group [disableRipple]="true" [@.disabled]="true" class="layout-type-tabs mt-5">
+              <mat-tab *ngFor="let contetBox of homeService.editScreenDetails.contents;let i = index"
+                label="Content Box {{i+1}}">
+                <app-content-box [contentBoxObject]="contetBox" [index]="i"></app-content-box>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-image" *ngIf="bannerImage" style="text-align: center;">
+        <div class="banner-text">
+          <img src="../../../assets/images/designScreen/no design.svg" />
+          <h3 style="padding: 5%;">No Screens Added</h3>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

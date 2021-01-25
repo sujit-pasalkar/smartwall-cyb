@@ -1,0 +1,148 @@
+table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  border-bottom: none;
+}
+
+tr.mat-header-row {
+  height: 1.117rem;
+}
+
+.mainWallWrapper select {
+  border: 1px solid #46464639
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding-left: 2.313rem !important;
+  padding-right: 2.313rem !important;
+  white-space: nowrap;
+  width: 20%;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* display: inline-block; */
+  vertical-align: middle;
+  min-height: 60px;
+}
+
+th.mat-header-cell {
+  min-height: auto;
+}
+
+
+/* td.mat-cell:first-of-type a {
+  margin-top: 4px;
+  display: inline-block;
+} */
+
+.response .progress-wrap {
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.listing-table tr th:nth-child(4) {
+  text-align: center;
+}
+
+.listing-table tr td:nth-child(4) {
+  text-align: center;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.mat-select-value {
+  font-size: 2px;
+}
+
+.mainWallWrapper {
+  padding: 3.125rem 1.5625rem 1.5625rem 1.5625rem;
+}
+
+.wall-page-header {
+  position: relative;
+  margin-bottom: 1.50rem;
+}
+
+.wall-page-header h1 {
+  margin-top: 8px;
+}
+
+.wall-page-header label {
+  color: #6b6b6b;
+  font-size: 0.938rem;
+}
+
+.listing-pagination {
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+
+.wall-status {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.wall-status label {
+  color: #6b6b6b;
+  font-size: 0.938rem;
+}
+
+.walls-right form {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2.188rem;
+  width: 68%;
+}
+.no-record-found {
+  color: #b00020 !important;
+  position: absolute;
+  font-size: 0.875rem !important;
+}
+tbody div{
+  overflow:scroll;
+  height:100px;
+}
+/* th.mat-sort-header-sorted {
+  color: black;
+} */
+
+.isDisbaled {
+cursor: not-allowed;
+opacity: 0.5;
+}
+td.mat-cell .action-lock img {
+width: 1rem;
+height: inherit;
+margin-left: 0.4rem;
+vertical-align: baseline;
+}
+
+/* edit wall name/label input  */
+.edit-action-btn {
+  display: inline-block;
+    margin: 0 0.063rem;
+    min-width: 2rem;
+    padding: 0.3rem 0.438rem;
+    text-align: center;
+    border: none;
+    background: #e3e6e9;
+    width: 0.938rem;
+    cursor: pointer;
+}
+
+.nameClose {
+  position: absolute;
+  left: 130px;
+}
+
+.lableClose {
+  position: absolute;
+  left: 427px;
+}

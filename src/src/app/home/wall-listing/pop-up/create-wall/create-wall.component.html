@@ -1,0 +1,38 @@
+<div class="login payment-layout">
+  <mat-dialog-content class="mat-typography payment-Scroll" style="overflow: inherit;">
+    <h4>Wall</h4>
+    <form class="checkout">
+      <div class="form-top">
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <div class="form-group mb-4">
+            <input id="name-field" type="text" placeholder="Type name.." class="form-control login-input" maxlength="32"
+              name="name" placement="bottom start" [(ngModel)]="name" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Label</label>
+          <div class="form-group mb-4">
+            <input id="label-field" type="text" placeholder="Type label.." class="form-control login-input"
+              maxlength="32" name="name" placement="bottom start" [(ngModel)]="label" required />
+            <div style="text-align: end;">
+              <label class="optional-label" for="Optional">*Optional</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div style="text-align: center;">
+      <p class="form-group customError cstmError" *ngIf="error" style="color: rgb(175, 25, 25);">
+        {{errorMessage}}
+      </p>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" style="padding-left:8px">
+    <button class="btn-green" mat-button (click)="continue()">Save</button>
+    <button class="btn-gray ml-2" mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  </mat-dialog-actions>
+</div>

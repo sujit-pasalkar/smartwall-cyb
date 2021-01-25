@@ -1,0 +1,17 @@
+
+.form-footer a {
+  color: #00BFB3;
+}
+.learnMore-label {
+  color: #25282A !important;
+}
+.learnMore-label:hover {
+  color: #00c0b4 !important;
+}
+.error-showing {
+  position: relative;
+  text-align: center;
+}
+.email-icon img {
+  width: 1.4rem;
+}
